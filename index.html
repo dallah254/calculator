@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>calculator</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+        h3 {
+            color: green;
+            font-size: 30px;
+            text-align: center;
+            margin-top: 20px;
+        }
+        .container {
+            width: 100%;
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .calculator {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        input, select {
+            display: flex;
+            gap: 20px;
+            flex: 1;
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            flex-direction: row;
+
+        }
+        button {
+            padding: 10px;
+            font-size: 16px;
+            border-radius: 5px;
+        }
+        button {
+            background-color: green;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: darkgreen;
+        }
+        #result {
+            margin-top: 20px;
+            font-size: 18px;
+            font-weight: bold;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h3>Simple Calculator</h3>
+        
+        <form action="">
+            <div class="calculator">
+                <input type="number" name="num1" placeholder="Enter first number" required>
+                <input type="number" name="num2" placeholder="Enter second number" required>
+                
+                <select name="operation" required>
+                    <option value="" disabled selected>Select operation</option>
+                    <option value="add">Addition (+)</option>
+                    <option value="subtract">Subtraction (-)</option>
+                    <option value="multiply">Multiplication (×)</option>
+                    <option value="divide">Division (÷)</option>
+                </select>
+                
+                <button type="submit">Calculate</button>
+            </div>
+        </form>
+        <div id="result"></div>
+    </div>
+
+    <script>
+        document.querySelector('form').addEventListener('submit', function(event) {
+            event.preventDefault();
+            
+            const num1 = parseFloat(this.num1.value);
+            const num2 = parseFloat(this.num2.value);
+            const operation = this.operation.value;
+            let result;
+            
+            switch(operation) {
+                case 'add':
+                    result = num1 + num2;
+                    break;
+                case 'subtract':
+                    result = num1 - num2;
+                    break;
+                case 'multiply':
+                    result = num1 * num2;
+                    break;
+                case 'divide':
+                    if (num2 === 0) {
+                        alert("Error: Division by zero is not allowed.");
+                        return;
+                    }
+                    result = num1 / num2;
+                    break;
+                default:
+                    alert("Please select a valid operation.");
+                    return;
+            }
+            document.getElementById('result').innerText = `The ${operation} of ${num1} and ${num2} is : ${result}`; 
+        });
+    </script>
+</body>
+</html>
